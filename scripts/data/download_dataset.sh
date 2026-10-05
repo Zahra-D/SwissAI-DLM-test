@@ -11,8 +11,8 @@
 set -euo pipefail
 
 # --- 2. SET ENVIRONMENT VARIABLES ---
-# Point the Hugging Face cache to your scratch space
-export HF_HOME=${SCRATCH}/SwissAI-DLM-data/hf_cache
+# Point the Hugging Face cache to scratch unless the caller selected a path.
+export HF_HOME="${HF_HOME:-${SCRATCH}/SwissAI-DLM-data/cache/hf}"
 mkdir -p "${HF_HOME}"
 
 # Paste your Hugging Face read token between the quotes if you want to keep it
@@ -31,7 +31,7 @@ if [[ -z "${HF_TOKEN:-}" ]]; then
   exit 1
 fi
 
-DATA_DIR=${SCRATCH}/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok
+DATA_DIR="${NEMOTRON_PRETOK_DIR:-${SCRATCH}/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok}"
 mkdir -p "${DATA_DIR}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"

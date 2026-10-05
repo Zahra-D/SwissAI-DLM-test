@@ -185,6 +185,10 @@ Read [the configuration reference](docs/configuration.md) before starting a
 large run. It describes the config groups, available choices, important
 settings, and batch-size calculation.
 
+For dataset selection, Hugging Face downloads, scratch-cache setup,
+pretokenized Nemotron data, streaming, and offline reuse, see the
+[dataset and caching guide](docs/datasets.md).
+
 ## Repository layout
 
 | Path | Purpose |

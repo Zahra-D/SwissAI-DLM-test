@@ -36,6 +36,7 @@ extra_javascript:
 nav:
   - Home: index.md
   - Configuration: configuration.md
+  - Datasets and caching: datasets.md
   - Clariden container: clariden-container.md
   - Architecture: architecture.md
   - Contributing: contributing.md

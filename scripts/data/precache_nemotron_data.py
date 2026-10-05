@@ -25,7 +25,7 @@ import torch
 from discrete_diffusion.data import get_dataset, get_tokenizer
 from discrete_diffusion import utils
 
-CONFIG_PATH = (Path(__file__).resolve().parents[1] / 'configs').as_posix()
+CONFIG_PATH = (Path(__file__).resolve().parents[2] / 'configs').as_posix()
 
 
 def _register_resolver(name, resolver):
