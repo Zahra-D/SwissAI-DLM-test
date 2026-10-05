@@ -1,0 +1,16 @@
+train: nemotron-cc-pretok-train
+valid: nemotron-cc-pretok-valid
+tokenizer_name_or_path: dvruette/gidd-unif-10b
+cache_dir: ${scratch_dir}/nemotron-cc-pretok
+pretok_tokens_column: tokens
+pretok_local_dir: ${oc.env:NEMOTRON_PRETOK_DIR,${scratch_dir}/gidd-nemotron-cc-pretok}
+wrap: False
+chunking: none
+streaming: False
+insert_train_eos: False
+insert_valid_eos: False
+insert_train_special: False
+insert_valid_special: False
+min_length: 0
+train_min_length: 0
+valid_min_length: 0

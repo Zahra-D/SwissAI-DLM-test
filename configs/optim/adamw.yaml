@@ -1,0 +1,7 @@
+name: adamw
+weight_decay: 0
+lr: 3e-4
+use_jax_param_groups: false
+beta1: 0.9
+beta2: 0.999
+eps: 1e-8

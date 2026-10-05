@@ -1,0 +1,75 @@
+defaults:
+  - config
+  - override /data: synthetic-ar
+  - override /model: small
+  - override /algo: ar
+  - override /optim: adamw
+  - override /sampling: ar
+  - override /lr_scheduler: constant_warmup
+  - override /strategy: ddp
+  - override /prior: none
+  - _self_
+
+seed: 1
+
+loader:
+  global_batch_size: 64
+  eval_global_batch_size: ${.global_batch_size}
+  batch_size: 4
+  eval_batch_size: 4
+  num_workers: 0
+  pin_memory: True
+  multiprocessing_context: null
+
+training:
+  ema: 0
+  antithetic_sampling: false
+  loss_precision: bf16
+  fault_tolerant: false
+  torch_compile: true
+  log_train_aux_metrics: false
+  sync_train_loss: false
+
+perf:
+  enabled: true
+  log_every_n_steps: 1
+  sync_cuda_for_timing: true
+  theoretical_peak_tflops_per_gpu: 989
+
+eval:
+  generate_samples: false
+
+trainer:
+  gradient_clip_val: 0.0
+  precision: bf16-mixed
+  num_sanity_val_steps: 0
+  max_steps: 100
+  log_every_n_steps: 5
+  limit_val_batches: 0
+  val_check_interval: 1000000
+  deterministic: false
+
+callbacks:
+  checkpoint_every_n_steps:
+    every_n_train_steps: 10000
+    save_top_k: 0
+    save_last: false
+  checkpoint_monitor:
+    save_top_k: 0
+
+checkpointing:
+  resume_from_ckpt: false
+
+model:
+  length: 2048
+  max_tokens: 2048
+  dropout: 0.0
+
+optim:
+  lr: 3e-4
+  weight_decay: 0.0
+
+wandb:
+  project: SwissAI_Scaling_Law-perf-synthetic
+  group: ar_adam_synthetic_perf
+  job_type: train

@@ -1,0 +1,84 @@
+#!/bin/bash
+#SBATCH --job-name=small_owt_pu_0_2
+#SBATCH --time=12:00:00
+#SBATCH --nodes=4
+#SBATCH --ntasks-per-node=4
+#SBATCH --cpus-per-task=72
+#SBATCH --gpus-per-node=4
+#SBATCH --account=a137
+#SBATCH --output=../logs/%x_%j.out
+#SBATCH --error=../logs/%x_%j.err
+#SBATCH --mail-user=
+#SBATCH --mail-type=ALL
+
+REPO_ROOT="${SLURM_SUBMIT_DIR:-$(pwd)}"
+cd "${REPO_ROOT}" || exit 1
+
+export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
+VENV_PYTHON="${REPO_ROOT}/venv-docker/bin/python"
+
+export WANDB_API_KEY=""
+export WANDB_MODE="online"
+export WANDB_DIR="${REPO_ROOT}/wandb_logs"
+mkdir -p "${WANDB_DIR}"
+
+export HYDRA_FULL_ERROR=1
+
+echo "------------------------------------------------------------"
+echo "Job ID: ${SLURM_JOB_ID}"
+echo "Submit Dir: ${SLURM_SUBMIT_DIR}"
+echo "Current Node: $(hostname)"
+echo "Working Dir: $(pwd)"
+echo "Repo Root: ${REPO_ROOT}"
+echo "Python Path: $(which python)"
+echo "Python version: $(python --version)"
+echo "PYTHONPATH: ${PYTHONPATH}"
+echo "Scratch Path: ${SCRATCH}"
+echo "WandB Dir: ${WANDB_DIR}"
+echo "------------------------------------------------------------"
+
+# --- Training Variables ---
+export P_UNIFORM=0.2
+
+# --- Launch Training ---
+srun --environment=uni-d2 \
+     --ntasks=16 \
+     --ntasks-per-node=4 \
+     --cpus-per-task=72 \
+     "${VENV_PYTHON}" -u -m discrete_diffusion \
+  data=openwebtext \
+    model=small \
+  algo=gidd \
+  algo.loss_type=gidd \
+  algo.p_uniform="${P_UNIFORM}" \
+  algo.loss_weighting=dynamic \
+  lr_scheduler=cosine_decay_warmup \
+  strategy=ddp \
+  trainer.deterministic=false \
+  trainer.num_nodes=4 \
+  trainer.devices=4 \
+  trainer.max_steps=500000 \
+  loader.global_batch_size=512 \
+  loader.batch_size=32 \
+  loader.eval_batch_size=4 \
+  trainer.log_every_n_steps=250 \
+  trainer.val_check_interval=1000 \
+  trainer.limit_val_batches=0.5 \
+  callbacks.checkpoint_every_n_steps.every_n_train_steps=1000 \
+  trainer.precision=bf16-mixed \
+  training.torch_compile=false \
+  model.length=512 \
+  model.dropout=0.0 \
+  optim.lr=5e-4 \
+  loader.multiprocessing_context=spawn \
+  loader.num_workers=4 \
+  loader.pin_memory=true\
+  optim.weight_decay=0.02 \
+  optim.beta1=0.9 \
+  optim.beta2=0.99 \
+  optim.eps=1e-9 \
+  hydra.run.dir=$SCRATCH/SwissAI-DLM-data/outputs/owt_tiny_small \
+  lr_scheduler.warmup_t=10000 \
+  wandb.save_dir="${WANDB_DIR}" \
+  wandb.name="small-gidd-constant-pi-${P_UNIFORM}_OWT_first" \
+  wandb.project=UNI-D2

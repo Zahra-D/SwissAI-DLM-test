@@ -1,0 +1,26 @@
+train: roneneldan/TinyStories
+valid: roneneldan/TinyStories
+tokenizer_name_or_path: gpt2
+cache_dir: ${scratch_dir}/tinystories
+wrap: True
+chunking: none
+streaming: False
+insert_train_eos: True
+insert_valid_eos: True
+insert_train_special: True
+insert_valid_special: True
+min_length: 0
+train_min_length: 0
+valid_min_length: 0
+model:
+  name: tiny
+  type: ddit
+  hidden_size: 256
+  cond_dim: 128
+  length: 128
+  n_blocks: 3
+  n_heads: 4
+  scale_by_sigma: True
+  dropout: 0.1
+  tie_word_embeddings: False
+  attn_backend: flex

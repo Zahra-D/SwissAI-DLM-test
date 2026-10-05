@@ -1,0 +1,39 @@
+# 8B-ish Hydra instantiation config for the gidd-easydel HF architecture wrapper.
+# With vocab_size=131072 and untied embeddings/head this is ~7.9B params.
+_target_: discrete_diffusion.models.gidd_hf_wrapper.GiddHFWrapper
+
+name: gidd_hf_8b
+type: gidd_hf
+
+# Core architecture
+hidden_size: 4096
+intermediate_size: 16384
+n_blocks: 32
+n_heads: 32
+length: 2048
+max_tokens: 2048
+dropout: 0.0
+
+# GIDD-specific transformer knobs
+rms_norm_eps: 1e-6
+attn_soft_cap: 30.0
+rope_theta: 10000.0
+resid_scale: 4.0
+head_scale: 512.0
+head_output_scaling_enabled: false  # BST/NanoGPT: no extra scaling of logits
+weight_scaling: fan_in
+init_scale: 0.4
+aux_init_scale: 0.02
+zero_head_init: true
+use_qk_norm: true
+attn_bias: True
+mlp_bias: True
+tie_word_embeddings: false
+
+attn_backend: flash_attn2
+attn_attn_backend: ${.attn_backend}
+torch_dtype: bf16
+fsdp_flatten_compatible: false
+activation_scale: 1.0
+activation_checkpointing: true
+activation_checkpoint_preserve_rng_state: false

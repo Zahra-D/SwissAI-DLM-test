@@ -1,0 +1,129 @@
+defaults:
+  - _self_
+  - /callbacks:
+    - checkpoint_every_n_steps
+    - checkpoint_monitor
+    - learning_rate_monitor
+    - late_validation_frequency
+    - late_train_logging
+    - pytorch_profiler
+    - sample_saver
+  - /data: text8
+  - /model: small_candi
+  - /noise: inverse-cdf
+  - /lr_scheduler: constant_warmup
+  - /optim: adamw
+  - /strategy: ddp
+  - /prior: none
+  - /sampling: candi
+  - /algo: candi
+
+seed: 1
+
+# base directory for caching datasets and models 
+scratch_dir: ${oc.env:DISCRETE_DIFFUSION_SCRATCH_DIR,${oc.env:HOME}/.cache/discrete_diffusion}
+block_size: ${model.length}
+
+neg_infinity_mode: large-finite  # large-finite / true-inf
+
+loader:
+  global_batch_size: 512
+  eval_global_batch_size: ${.global_batch_size}
+  # Note: batch_size and eval_batch_size are **per machine**
+  batch_size: ${div_up:${.global_batch_size}, ${mul:${trainer.devices}, ${trainer.num_nodes}}}
+  eval_batch_size: ${div_up:${.eval_global_batch_size}, ${mul:${trainer.devices}, ${trainer.num_nodes}}}
+  num_workers: 12
+  pin_memory: True
+  multiprocessing_context: null
+
+training:
+  ema: 0.9999
+  antithetic_sampling: True
+  importance_sampling: False
+  change_of_variables: False
+  loss_precision: 'bf16'  # bf16, float32, float64
+  finetune_path: ''
+  torch_compile: false
+  log_train_aux_metrics: true
+  sync_train_loss: true
+  resample: False
+  sampling_eps: 1e-3
+  sampling_eps_min: 1e-3
+  sampling_eps_max: 1.0
+  eval_nll: True
+  fault_tolerant: true
+  # Run one additional validation pass on the final in-memory weights after
+  # trainer.fit() returns. Periodic validation alone does not guarantee that
+  # max_steps itself is evaluated when it is not divisible by val_check_interval.
+  validate_after_training: false
+
+perf:
+  enabled: false
+  log_every_n_steps: 1
+  sync_cuda_for_timing: true
+  # Dense per-GPU peak used for MFU. Set per cluster/GPU, e.g. H100 BF16 ~989.
+  theoretical_peak_tflops_per_gpu: null
+  # Optional manual override. Otherwise estimated as 6 * trainable params
+  # plus dense attention FLOPs for the configured transformer shape.
+  flops_per_token: null
+
+parallel:
+  pipeline:
+    enabled: false
+    schedule: 1f1b
+    num_microbatches: 4
+    batch_size: null
+    checkpoint_every_n_steps: 0
+
+eval:
+  checkpoint_path: ''  # Used to evaluate a checkpoint after training.
+  disable_ema: False
+  compute_perplexity_on_sanity: False
+  generate_samples: True
+  save_validation_samples: false
+  generated_samples_path: ${cwd:}/samples.json
+  results_json_path: null
+  npz_path: null
+
+trainer:
+  accelerator: cuda
+  num_nodes: 1
+  devices: ${device_count:}
+  accumulate_grad_batches: ${div_up:${loader.global_batch_size}, ${mul:${trainer.devices}, ${loader.batch_size}, ${trainer.num_nodes}}}
+  gradient_clip_val: 1.0
+  precision: 'bf16'
+  num_sanity_val_steps: 2
+  max_epochs: null
+  max_steps: 500_000
+  log_every_n_steps: 100
+  limit_train_batches: 1.0   # train on full dataset, can be used to toggle quick run
+  limit_val_batches: 1.0     # validate on full dataset, can be used to toggle quick run
+  val_check_interval: 10000
+  check_val_every_n_epoch: null
+  deterministic: false
+
+wandb:
+  project: UNI-D2
+  save_dir: null
+  notes: null
+  group: null
+  job_type: null
+  name: null
+  id: null 
+  tags:
+    - ${data.train}
+    - ${data.valid}
+    - ${algo.name}
+
+hydra:
+  run:
+    dir: ./outputs/${data.train}/${now:%Y.%m.%d}/${now:%H%M%S}
+  job:
+    chdir: true
+
+checkpointing:
+  # Use custom `save_dir` if, e.g., saving to S3 bucket, otherwise leave this parameter as is
+  save_dir: ${cwd:}/dummy_checkpoints
+  # Note: `checkpoints` path should correspond to `checkpoint_every_n_steps.dirpath`
+  resume_from_ckpt: true
+  resume_ckpt_path: ${.save_dir}/checkpoints/last.ckpt

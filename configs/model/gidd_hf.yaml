@@ -1,0 +1,47 @@
+# Hydra instantiation config for gidd-easydel HF architecture wrapper
+_target_: discrete_diffusion.models.gidd_hf_wrapper.GiddHFWrapper
+
+name: gidd_hf
+type: gidd_hf
+
+# Core architecture
+hidden_size: 768
+intermediate_size: 3072
+n_blocks: 12
+n_heads: 12
+length: 1024
+max_tokens: 1024
+dropout: 0.0
+
+# GIDD-specific transformer knobs
+rms_norm_eps: 1e-6
+attn_soft_cap: 30.0
+rope_theta: 10000.0
+resid_scale: 4.0
+head_scale: 512.0
+# Disabled by default to match BST/NanoGPT: logits = hidden @ lm_head.T with
+# no additional head_scale / hidden_size multiplier. Set true only to
+# reproduce the historical EasyDeL-style output scaling.
+head_output_scaling_enabled: false
+weight_scaling: fan_in
+init_scale: 0.4
+aux_init_scale: 0.02    # Easydel alias for emb/head init scale
+zero_head_init: true
+use_qk_norm: true
+attn_bias: True        # Easydel alias for attention_bias
+mlp_bias: True
+tie_word_embeddings: false
+
+# Use eager attention by default for broader torch compatibility.
+attn_backend: flash_attn2  # eager | flex | flashn
+# Wrapper currently reads `attn_attn_backend` for HF config wiring.
+attn_attn_backend: ${.attn_backend}
+# Optional explicit dtype override for wrapper auto-selection: bf16 | fp16 | fp32
+torch_dtype: bf16
+# Opt-in only for the current root-wrapped FSDP strategy, which requires a
+# uniform parameter dtype when it flattens parameters. DDP keeps fp32 RMSNorm
+# scales by leaving this false.
+fsdp_flatten_compatible: false
+activation_scale: 1.0
+activation_checkpointing: false
+activation_checkpoint_preserve_rng_state: false

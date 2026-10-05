@@ -1,0 +1,4 @@
+_target_: discrete_diffusion.noise_schedules.inverse_cdf.InverseCDF
+eps: 1e-3
+r_max: .25
+r_min: .01

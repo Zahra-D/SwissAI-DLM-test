@@ -1,0 +1,9 @@
+predictor: ar
+steps: ${model.length}
+use_float64: False
+p_nucleus: 1.0
+num_sample_batches: 1
+num_sample_log: 2
+inject_bos: True
+sampler:
+  _target_: discrete_diffusion.sampling.ar.ARSampler

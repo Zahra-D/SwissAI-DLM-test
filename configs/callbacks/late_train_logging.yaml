@@ -1,0 +1,6 @@
+late_train_logging:
+  _target_: discrete_diffusion.callbacks.late_train_logging.LateTrainLoggingCallback
+  enabled: false
+  last_n_steps: 100
+  source_metric_name: train/elbo
+  output_metric_name: analysis/train_elbo_final_window

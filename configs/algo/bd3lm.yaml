@@ -1,0 +1,28 @@
+defaults:
+  - /forward_process: absorbing
+
+_target_: discrete_diffusion.algorithms.bd3lm.BD3LM
+name: bd3lm
+backbone: block-dit  # dit / block-dit / dimamba / hf_dit
+time_conditioning: False
+T: 0  # 0 (continuous) / 5000 (default sampling steps)
+causal_attention: False
+dropout: 0.0
+ignore_bos: True
+cross_attn: True
+var_min: True
+clip_search_delta: 0.05
+clip_search_widths: []
+fix_clipping: False
+sampler:
+  _target_: discrete_diffusion.sampling.bd3lm.BD3LMSampler
+mdlm_loss_scale: False
+loss_type: elbo
+
+data:
+  cache_dir: /fast/project/HFMI_SynergyUnit/kalyan.nadimpalli/Discrete_Diffusion/datasets/pgm_owt_bd3lm
+  insert_train_eos: False
+  insert_valid_eos: False
+  insert_train_special: False
+  insert_valid_special: False
+

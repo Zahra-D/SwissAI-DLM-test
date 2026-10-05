@@ -1,0 +1,17 @@
+pytorch_profiler:
+  _target_: src.discrete_diffusion.callbacks.pytorch_profiler_callback.PyTorchProfilerCallback
+  enabled: false
+  start_step: 2
+  warmup_batches: 2
+  active_batches: 4
+  dirpath: ${cwd:}/pytorch_profiler
+  filename: profile
+  row_limit: 50
+  record_shapes: true
+  profile_memory: true
+  with_stack: false
+  with_flops: true
+  export_chrome_trace: true
+  export_memory_timeline: false
+  profile_all_ranks: false
+  sort_by: cuda_time_total

@@ -1,0 +1,15 @@
+defaults:
+  - /forward_process: absorbing
+_target_: discrete_diffusion.algorithms.sedd.SEDD
+name: sedd
+backbone: dit
+parameterization: sedd
+time_conditioning: True
+T: 0  # 0 (continuous time) / 1000
+causal_attention: False
+ignore_bos: True
+loss_type: elbo
+# Step 7: configure log-linear schedule for SEDD (matches BD3LMS recipe)
+noise_schedule:
+  name: log_linear
+  eps: 1e-3

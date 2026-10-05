@@ -1,0 +1,4 @@
+_target_: discrete_diffusion.forward_process.candi_hybrid.HybridForwardCANDI
+
+# Legacy name field for backward compatibility
+name: candi_hybrid

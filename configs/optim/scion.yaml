@@ -1,0 +1,28 @@
+name: scion
+weight_decay: 0
+lr: 1.0
+# Rustem/BST setup: use the FW stepsize as the learning rate for every group.
+# Set false only to reproduce the historical complete-p group LR scaling.
+equal_group_lr: true
+# Section B.3 initialization on each configured LMO boundary.
+boundary_init: true
+min_lr: 1e-5
+warmdown_iters: 0
+warmup_iters: 100
+momentum: 1.0
+trace_enabled: false
+trace_collect_noise_stats: false
+trace_noise_stats_every: 200
+trace_noise_min_samples: 3
+trace_m: 3
+spectral_norm_steps: 5
+bias_norm: RowNorm
+norm_layer_norm: BiasRMS
+#for matrices wer are using spectral norm
+
+aux_lr_factor: 0.02
+scale_embed: 3000.0
+scale_bias: 10.0
+scale_layer_norm: 10.0
+scale_matrix: 50.0
+unconstrained: false

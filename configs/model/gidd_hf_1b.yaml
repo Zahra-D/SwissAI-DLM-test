@@ -1,0 +1,37 @@
+# Larger Hydra instantiation config for gidd-easydel HF architecture wrapper
+_target_: discrete_diffusion.models.gidd_hf_wrapper.GiddHFWrapper
+
+name: gidd_hf_1b
+type: gidd_hf
+
+# Core architecture
+hidden_size: 1536
+intermediate_size: 6144
+n_blocks: 24
+n_heads: 24
+length: 1024
+max_tokens: 1024
+dropout: 0.0
+
+# GIDD-specific transformer knobs
+rms_norm_eps: 1e-6
+attn_soft_cap: 30.0
+rope_theta: 10000.0
+resid_scale: 4.0
+head_scale: 512.0
+head_output_scaling_enabled: false  # BST/NanoGPT: no extra scaling of logits
+weight_scaling: fan_in
+init_scale: 0.4
+aux_init_scale: 0.02
+zero_head_init: true
+use_qk_norm: true
+attn_bias: True
+mlp_bias: True
+tie_word_embeddings: false
+
+attn_backend: flash_attn2
+attn_attn_backend: ${.attn_backend}
+torch_dtype: bf16
+activation_scale: 1.0
+activation_checkpointing: false
+activation_checkpoint_preserve_rng_state: false

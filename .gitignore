@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+.eggs/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+venv-docker/
+env/
+ENV/
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Local agent/tool state
+.agents/
+.codex/
+.cache/
+
+# Training data and generated outputs
+datasets/
+training-data/
+training_data/
+outputs/
+logs/
+wandb/
+wandb_logs/
+wandb_reports/
+slurm_scripts/
+dummy_checkpoints/
+samples.json
+*.log
+*.out
+*.err
+*.wandb
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.arrow
+*.lock
+!requirements.lock
+*.bin
+*.h5
+*.hdf5
+
+# Temporary and local-only files
+tmp*/
+*.tmp
+*.tar
+*.tar.gz
+*.sqsh
+NOTES.md
+
+# Personal scratch launchers are intentionally outside the public workflow.
+my_scripts/

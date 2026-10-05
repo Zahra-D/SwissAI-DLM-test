@@ -1,0 +1,113 @@
+site_name: UNI-D²
+site_url: https://nkalyanv99.github.io/UNI-D2/
+theme:
+  name: material
+  features:
+    - navigation.indexes
+    - content.code.copy
+    - content.tooltips
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            docstring_style: google
+            show_root_heading: true
+            show_source: true
+  - include-markdown
+
+extra_javascript:
+  - https://unpkg.com/mermaid/dist/mermaid.min.js
+
+nav:
+  - Home: index.md
+  - Configuration: configuration.md
+  - Clariden container: clariden-container.md
+  - Architecture: architecture.md
+  - Contributing: contributing.md
+  - Examples:
+      - CANDI: examples/candi.md
+      - MDLM: examples/mdlm.md
+      - PGM: examples/pgm.md
+      - BD3LM: examples/bd3lm.md
+      - FlexMDM: examples/flexmdm.md
+      - GIDD: examples/gidd.md
+      - SEDD: examples/sedd.md
+      - UDLM: examples/udlm.md
+  - Extension Guides:
+      - Overview: extension_guides/README.md
+      - Custom Algorithm: extension_guides/01_custom_algorithm.md
+      - Custom Forward Process: extension_guides/02_custom_forward_process.md
+      - Custom Noise Schedule: extension_guides/03_custom_noise_schedule.md
+      - Custom Model: extension_guides/04_custom_model.md
+  - API Reference:
+      - Algorithms:
+          - Base Trainer: reference/algorithms/base.md
+          - CANDI: reference/algorithms/candi.md
+          - MDLM: reference/algorithms/mdlm.md
+          - UDLM: reference/algorithms/udlm.md
+          - AR: reference/algorithms/ar.md
+          - BD3LM: reference/algorithms/bd3lm.md
+          - FlexMDM: reference/algorithms/flexmdm.md
+          - GIDD: reference/algorithms/gidd.md
+          - Partition: reference/algorithms/partition_mdlm.md
+          - SEDD: reference/algorithms/sedd.md
+      - Models:
+          - DiT: reference/models/dit.md
+          - CANDI DiT: reference/models/dit_candi.md
+          - Common Layers: reference/models/common.md
+          - Block DiT: reference/models/block_dit.md
+          - EMA: reference/models/ema.md
+          - Encoder-Decoder: reference/models/encoder_decoder.md
+          - FlexMDM Transformer: reference/models/flexmdm.md
+          - HF GPT2: reference/models/hf_gpt2.md
+      - Forward Process:
+          - Base: reference/forward_process/base.md
+          - Absorbing: reference/forward_process/absorbing.md
+          - Block Absorbing: reference/forward_process/block_absorbing.md
+          - CANDI Hybrid: reference/forward_process/candi_hybrid.md
+          - Uniform: reference/forward_process/uniform.md
+          - FlexMDM: reference/forward_process/flexmdm.md
+          - Utils: reference/forward_process/utils.md
+      - Noise Schedules:
+          - Base: reference/noise_schedules/base.md
+          - Cosine: reference/noise_schedules/cosine.md
+          - Flex: reference/noise_schedules/flex.md
+          - Geometric: reference/noise_schedules/geometric.md
+          - Hybrid: reference/noise_schedules/hybrid.md
+          - Linear: reference/noise_schedules/linear.md
+          - Log-Linear: reference/noise_schedules/log_linear.md
+      - Sampling:
+          - Base: reference/sampling/base.md
+          - Absorbing: reference/sampling/absorbing.md
+          - AR: reference/sampling/ar.md
+          - BD3LM: reference/sampling/bd3lm.md
+          - CANDI: reference/sampling/candi.md
+          - EB: reference/sampling/eb.md
+          - FlexMDM: reference/sampling/flexmdm.md
+          - GIDD: reference/sampling/gidd.md
+          - Partition: reference/sampling/partition.md
+          - Uniform: reference/sampling/uniform.md
+      - Evaluations:
+          - Metrics: reference/evaluations/metrics.md
+          - Generative PPL: reference/evaluations/generative_ppl.md
+          - Harness: reference/evaluations/harness.md
+      - Callbacks:
+          - Sample Saver: reference/callbacks/sample_saver.md
+          - Training Latency: reference/callbacks/latency.md
+      - Optimization:
+          - SCION: reference/optimization/scion.md

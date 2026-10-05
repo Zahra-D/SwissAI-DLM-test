@@ -1,0 +1,22 @@
+defaults:
+  - /forward_process: absorbing
+
+_target_: discrete_diffusion.algorithms.partition_mdlm.PartitionMDLM
+name: partition-mdlm
+backbone: encoder-decoder
+parameterization: subs
+time_conditioning: False
+T: 0  # 0 (continuous time) / 1000
+causal_attention: False
+ignore_bos: False
+loss_type: elbo  # elbo, low_var
+sampling_mode: efficient-uniform  # naive / efficient-uniform / efficient-non-uniform
+post_process_fp64: false
+
+# Step 7: configurable schedule + forward process (defaults)
+noise_schedule:
+  name: log_linear
+  eps: ${noise.eps}
+
+sampler:
+  _target_: discrete_diffusion.sampling.partition.PartitionSampler

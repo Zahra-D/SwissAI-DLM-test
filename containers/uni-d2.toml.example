@@ -1,0 +1,19 @@
+image = "/iopsstor/scratch/cscs/<username>/ce-images/uni-d2-updated.sqsh"
+
+mounts = [
+  "/users/<username>",
+  "/iopsstor/scratch/cscs/<username>",
+  "/iopsstor/scratch/cscs/<username>:/iopsstor/scratch/cscs/<username>"
+]
+
+workdir = "/users/<username>/SwissAI-DLM"
+
+[env]
+NCCL_DEBUG = "INFO"
+CUDA_CACHE_DISABLE = "1"
+TORCH_NCCL_ASYNC_ERROR_HANDLING = "1"
+MPICH_GPU_SUPPORT_ENABLED = "0"
+
+[annotations]
+com.hooks.netstack.source = "artifact"
+com.hooks.aws_ofi_nccl.enabled = "true"

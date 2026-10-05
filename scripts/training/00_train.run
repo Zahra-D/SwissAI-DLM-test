@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --job-name=TrainDLM
+#SBATCH --time=12:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=4
+#SBATCH --cpus-per-task=72
+#SBATCH --gpus-per-node=4
+#SBATCH --account=a137
+#SBATCH --output=../logs/%x_%j.out
+#SBATCH --error=../logs/%x_%j.err
+#SBATCH --environment=uni-d2
+#SBATCH --mail-user=your_email@XXX.com
+#SBATCH --mail-type=ALL
+
+export DISCRETE_DIFFUSION_SCRATCH_DIR="$SCRATCH/SwissAI-DLM-data/training-data"
+
+source venv-docker/bin/activate
+# pip install -e . --no-deps
+cd ..
+export PYTHONPATH=src
+# Use srun so SLURM launches one task per GPU (Fabric expects this in multi-GPU mode).
+srun --ntasks=${SLURM_NTASKS:-4} \
+     --ntasks-per-node=${SLURM_NTASKS_PER_NODE:-4} \
+     --cpus-per-task=${SLURM_CPUS_PER_TASK:-72} \
+     python -u -m discrete_diffusion \
+  data=openwebtext-split \
+  model=small \
+  algo=mdlm \
+  loader.batch_size=32 \
+  trainer.devices=4 \
+  hydra.run.dir=$SCRATCH/SwissAI-DLM-data/outputs

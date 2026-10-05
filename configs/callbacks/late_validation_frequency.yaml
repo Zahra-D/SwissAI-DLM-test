@@ -1,0 +1,7 @@
+late_validation_frequency:
+  _target_: src.discrete_diffusion.callbacks.late_validation_frequency.LateValidationFrequencyCallback
+  # Disabled by default: normal experiments retain their existing cadence.
+  enabled: false
+  # 0.72 aligns approximately with the beginning of the 28% warmdown phase.
+  start_fraction: 0.72
+  every_n_steps: 100

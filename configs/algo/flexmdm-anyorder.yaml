@@ -1,0 +1,26 @@
+_target_: discrete_diffusion.algorithms.flexmdm_anyorder.FlexMDMAnyOrder
+name: flexmdm-anyorder
+backbone: flexmdm-anyorder
+parameterization: anyorder  # FlexMDM uses its own parameterization
+time_conditioning: True  # Model uses time conditioning
+T: 0  # Continuous-time training
+
+# Loss function configuration
+unmask_loss_fn: elbo  # Cross-entropy loss for token prediction
+insert_loss_fn: expectation  # Jump kernel ELBO for insertion (or 'distribution' for length posterior)
+
+# FlexMDM-specific settings
+only_embed_insert: True  # Only embed insertion time (not both insert and unmask)
+
+# Schedule configuration mirrors FlexMDM reference defaults
+insert_schedule:
+  type: linear
+unmask_schedule:
+  type: linear
+
+# Algorithm doesn't use standard forward process
+# (FlexMDM has its own interpolant with joint insertion/masking)
+
+sampler:
+  _target_: discrete_diffusion.sampling.flexmdm_anyorder.FlexMDMAnyOrderSampler
+

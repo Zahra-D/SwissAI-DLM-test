@@ -1,0 +1,14 @@
+train: slimpajama
+valid: openwebtext-valid
+tokenizer_name_or_path: gpt2
+cache_dir: ${scratch_dir}/slimpajama
+wrap: True
+chunking: none
+streaming: False
+insert_train_eos: True
+insert_valid_eos: True
+insert_train_special: True
+insert_valid_special: True
+min_length: 0
+train_min_length: 0
+valid_min_length: 0

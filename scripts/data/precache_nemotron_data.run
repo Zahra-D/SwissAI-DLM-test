@@ -1,0 +1,87 @@
+#!/bin/bash
+#SBATCH --job-name=precache_nemotron
+#SBATCH --time=10:00:00
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=288
+#SBATCH --account=ab035
+#SBATCH --output=../logs/%x_%j.out
+#SBATCH --error=../logs/%x_%j.err
+#SBATCH --environment=uni-d2
+
+# 288-core CPU nodes provide 870,000 MB RAM; 800G is the largest practical
+# request that leaves system headroom and can therefore be scheduled.
+#SBATCH --mem=800G
+
+# One-node, CPU-only-in-practice caching job (no --gpus-per-node requested,
+# same minimal-footprint pattern as download_dataset.sh). Purpose: run the
+# nemotron-cc-pretok caching pipeline once on a single CPU node, instead of
+# paying for multiple idle-GPU nodes as a side effect of a training launch.
+#
+# Once this finishes, the cache under $SCRATCH/SwissAI-DLM-data/cache/
+# discrete_diffusion/ is reused by training jobs with matching data/model
+# settings (same block_size/wrap/eos/special-token configuration).
+
+set -euo pipefail
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+cd "${REPO_ROOT}"
+
+export PYTHONPATH="${REPO_ROOT}/src${PYTHONPATH:+:${PYTHONPATH}}"
+VENV_PYTHON="${REPO_ROOT}/venv-docker/bin/python"
+export HYDRA_FULL_ERROR=1
+
+if [[ ! -x "${VENV_PYTHON}" ]]; then
+  echo "Python environment is unavailable: ${VENV_PYTHON}" >&2
+  echo "Create/repair venv-docker, then resubmit." >&2
+  exit 2
+fi
+
+# Keep the generated dataset cache on scratch.  The default is ~/.cache,
+# which is not a durable location for this multi-hundred-GB cache.
+export DISCRETE_DIFFUSION_SCRATCH_DIR="${SCRATCH}/SwissAI-DLM-data/cache/discrete_diffusion"
+export HF_HOME="${SCRATCH}/SwissAI-DLM-data/cache/hf"
+mkdir -p "${DISCRETE_DIFFUSION_SCRATCH_DIR}" "${HF_HOME}"
+
+# Keep both preparation and training packing at 224 for maximum throughput and
+# to reuse the existing 224-shard preparation cache.  Validation is tiny and
+# deliberately uses one worker: the older job OOMed only after train completed,
+# when validation also launched 224 workers.
+CACHE_NUM_PROC="${CACHE_NUM_PROC:-224}"
+PACK_NUM_PROC="${PACK_NUM_PROC:-224}"
+PACK_WRITER_BATCH_SIZE="${PACK_WRITER_BATCH_SIZE:-128}"
+VALID_CACHE_NUM_PROC="${VALID_CACHE_NUM_PROC:-1}"
+VALID_PACK_NUM_PROC="${VALID_PACK_NUM_PROC:-1}"
+
+# Each Hugging Face worker is already a separate process.  Prevent BLAS/OpenMP
+# from creating additional thread pools (and additional per-process memory).
+export OMP_NUM_THREADS=1
+export MKL_NUM_THREADS=1
+export OPENBLAS_NUM_THREADS=1
+export NUMEXPR_NUM_THREADS=1
+export MALLOC_ARENA_MAX=2
+export TOKENIZERS_PARALLELISM=false
+
+echo "------------------------------------------------------------"
+# echo "Job ID: ${SLURM_JOB_ID}"
+echo "Node: $(hostname)"
+echo "CPUs allocated: ${SLURM_CPUS_PER_TASK:-unset}"
+echo "Prepare workers: ${CACHE_NUM_PROC}"
+echo "Pack workers: ${PACK_NUM_PROC}"
+echo "Pack writer batch size: ${PACK_WRITER_BATCH_SIZE}"
+echo "------------------------------------------------------------"
+
+# Match the model/sequence-length config of the real sweep so this cache
+# is actually reused (cache key includes block_size/wrap/eos/special).
+# Preparation and packing use separate process counts so validation can remain
+# conservative without slowing the full training split.
+"${VENV_PYTHON}" -u "${REPO_ROOT}/scripts/data/precache_nemotron_data.py" \
+  data=nemotron-cc-pretok \
+  model=gidd_hf \
+  model.length=2048 \
+  loader.num_workers="${CACHE_NUM_PROC}" \
+  +loader.pack_num_workers="${PACK_NUM_PROC}" \
+  +loader.pack_writer_batch_size="${PACK_WRITER_BATCH_SIZE}" \
+  +loader.valid_num_workers="${VALID_CACHE_NUM_PROC}" \
+  +loader.valid_pack_num_workers="${VALID_PACK_NUM_PROC}"

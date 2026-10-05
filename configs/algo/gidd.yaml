@@ -1,0 +1,35 @@
+_target_: discrete_diffusion.algorithms.gidd.GIDD
+name: gidd
+backbone: dit  # reuse DiT backbone
+parameterization: subs
+time_conditioning: True
+T: 0  # 0 (continuous-time training)
+causal_attention: False
+
+# GIDD-specific knobs (wired in later milestones)
+loss_type: gidd  # gidd | gidd_constant_pi | gidd_easydel | gidd_easydel_lowmem
+p_uniform: 0.0
+t_eps: 1e-4
+low_discrepancy_sampling: True
+# Scope of the low-discrepancy time grid during distributed training.
+# local: one B_local-point grid per rank (historical behavior).
+# global_batch: one B_global-point grid, sharded across rank/micro-batch.
+# This controls time sampling only; token-corruption draws remain local.
+time_sampling_scope: local
+loss_weighting: dynamic  # dynamic | clip | none
+min_loss_weight: 0.0
+max_loss_weight: 2.0
+
+# EasyDel-style GIDD knobs (used when loss_type=gidd_easydel)
+min_log_snr: -10.0
+max_log_snr: 10.0
+hybrid_mixing_scale: 1.0
+hybrid_mixing_shift: 0.0
+prior_distribution: masked  # masked | uniform
+beta_is_div: 1.0
+easydel_lowmem_chunk_size: 8192
+easydel_lowmem_checkpoint_chunks: true
+
+# Keep model dims in configs/model/*.yaml (e.g., small.yaml)
+sampler:
+  _target_: discrete_diffusion.sampling.gidd.GIDDSampler

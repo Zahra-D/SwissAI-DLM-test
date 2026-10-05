@@ -1,0 +1,31 @@
+# Hydra instantiation config for DIT model
+_target_: discrete_diffusion.models.dit.DIT
+
+# Legacy fields for backward compatibility
+name: tiny
+type: ddit
+hidden_size: 256
+cond_dim: 128
+length: 128
+n_blocks: 3
+n_heads: 4
+scale_by_sigma: True
+dropout: 0.1
+tie_word_embeddings: False
+vocab_lookup: True
+causal_attention: false
+adaln: true
+max_tokens: 128
+attn_type: full
+attn_backend: flex
+activation_scale: 1.0
+
+## N params
+# emb: 50k * 256 * 2 = 256 * 100k = 25 600 000
+# model: 
+  # D = 256
+  # Block:
+    # attn + outproj: 4D^2
+    # mlp: 8D^2
+  # 3 * Block = 36D^2 = 36 * 256 * 256 = 2 359 296
+# ~= 28M

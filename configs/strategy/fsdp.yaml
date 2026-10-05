@@ -1,0 +1,5 @@
+# GIDD's 8B model needs nested, transformer-block FSDP wrapping: a root-only
+# wrapper materializes the whole model during backward and OOMs even on 96 GiB
+# GPUs. FULL_SHARD also shards parameters, gradients, and optimizer state.
+_target_: discrete_diffusion.parallel.fsdp.GiddFSDPStrategy
+sharding_strategy: FULL_SHARD

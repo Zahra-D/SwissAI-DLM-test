@@ -1,0 +1,15 @@
+# Hydra instantiation config for FlexMDM AnyOrderMaskInsertionFlow model
+_target_: discrete_diffusion.models.flexmdm_transformer.AnyOrderMaskInsertionFlow
+
+# Legacy fields for backward compatibility
+name: flexmdm-anyorder
+type: flexmdm-anyorder
+hidden_size: 768
+cond_dim: 128
+length: 1024
+n_blocks: 12
+n_heads: 12
+dropout: 0.1
+mask_token: null
+pad_token: null
+activation_scale: 1.0
