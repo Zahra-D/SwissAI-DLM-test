@@ -1,0 +1,3601 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://nkalyanv99.github.io/UNI-D2/datasets/">
+      
+      
+        <link rel="prev" href="../configuration/">
+      
+      
+        <link rel="next" href="../clariden-container/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Datasets and caching - UNI-D²</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datasets-downloads-and-caching" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="UNI-D²" class="md-header__button md-logo" aria-label="UNI-D²" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            UNI-D²
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Datasets and caching
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="UNI-D²" class="md-nav__button md-logo" aria-label="UNI-D²" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    UNI-D²
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets and caching
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Datasets and caching
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-data-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a data path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-clariden-storage-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Clariden storage layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-1-synthetic-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: synthetic data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-automatic-hugging-face-download-and-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: automatic Hugging Face download and cache
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: automatic Hugging Face download and cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-for-gated-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication for gated datasets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-3-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-4-pretokenized-nemotron-on-clariden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: pretokenized Nemotron on Clariden
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 4: pretokenized Nemotron on Clariden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-enter-the-project-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Enter the project container
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-download-the-parquet-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Download the Parquet files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-the-reusable-packed-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Build the reusable packed cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-train-from-the-local-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Train from the local data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-5-deterministic-packed-subset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 5: deterministic packed subset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offline-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline reuse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-and-maintaining-caches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspecting and maintaining caches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-another-hugging-face-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding another Hugging Face dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clariden-container/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clariden container
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/candi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CANDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/mdlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/pgm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    PGM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/bd3lm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BD3LM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/flexmdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlexMDM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/gidd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GIDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/sedd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SEDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/udlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UDLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../extension_guides/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extension Guides
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Extension Guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_guides/01_custom_algorithm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Algorithm
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_guides/02_custom_forward_process/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Forward Process
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_guides/03_custom_noise_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Noise Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../extension_guides/04_custom_model/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom Model
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    API Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_1" id="__nav_9_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base Trainer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/candi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CANDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/mdlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MDLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/udlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    UDLM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/ar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/bd3lm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BD3LM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/flexmdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlexMDM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/gidd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GIDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/partition_mdlm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Partition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/algorithms/sedd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SEDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_2" id="__nav_9_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Models
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Models
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/dit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    DiT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/dit_candi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CANDI DiT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/common/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Common Layers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/block_dit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Block DiT
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/ema/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EMA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/encoder_decoder/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Encoder-Decoder
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/flexmdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlexMDM Transformer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/models/hf_gpt2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    HF GPT2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_3" id="__nav_9_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Forward Process
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Forward Process
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/absorbing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Absorbing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/block_absorbing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Block Absorbing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/candi_hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CANDI Hybrid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/uniform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uniform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/flexmdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlexMDM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/forward_process/utils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Utils
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_4" id="__nav_9_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Noise Schedules
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Noise Schedules
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/cosine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cosine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/flex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/geometric/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Geometric
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/hybrid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/linear/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Linear
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/noise_schedules/log_linear/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Log-Linear
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_5" id="__nav_9_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sampling
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sampling
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/base/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/absorbing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Absorbing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/ar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AR
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/bd3lm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BD3LM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/candi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CANDI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/eb.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    EB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/flexmdm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FlexMDM
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/gidd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GIDD
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/partition/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Partition
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/sampling/uniform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Uniform
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_6" id="__nav_9_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Evaluations
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Evaluations
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/evaluations/metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/evaluations/generative_ppl/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Generative PPL
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/evaluations/harness/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Harness
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_7" id="__nav_9_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Callbacks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Callbacks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/callbacks/sample_saver/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sample Saver
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/callbacks/latency/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Training Latency
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_9_8" id="__nav_9_8_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optimization
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_9_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Optimization
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/optimization/scion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    SCION
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#choose-a-data-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose a data path
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#recommended-clariden-storage-layout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recommended Clariden storage layout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-1-synthetic-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: synthetic data
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-2-automatic-hugging-face-download-and-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: automatic Hugging Face download and cache
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 2: automatic Hugging Face download and cache">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#authentication-for-gated-datasets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Authentication for gated datasets
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-3-streaming" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 3: streaming
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-4-pretokenized-nemotron-on-clariden" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 4: pretokenized Nemotron on Clariden
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Option 4: pretokenized Nemotron on Clariden">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-enter-the-project-container" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Enter the project container
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-download-the-parquet-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Download the Parquet files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-build-the-reusable-packed-cache" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Build the reusable packed cache
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-train-from-the-local-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Train from the local data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#option-5-deterministic-packed-subset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 5: deterministic packed subset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#offline-reuse" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Offline reuse
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-and-maintaining-caches" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inspecting and maintaining caches
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-another-hugging-face-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adding another Hugging Face dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="datasets-downloads-and-caching">Datasets, downloads, and caching</h1>
+<p>SwissAI-DLM can generate synthetic tokens, download datasets through Hugging
+Face, stream large corpora, or train from pretokenized files stored locally.
+This guide describes each path and the recommended layout on CSCS Clariden.</p>
+<h2 id="choose-a-data-path">Choose a data path</h2>
+<table>
+<thead>
+<tr>
+<th>Goal</th>
+<th>Recommended path</th>
+<th>Network needed during training?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Verify an installation</td>
+<td><code>data=synthetic</code> or <code>data=synthetic-gidd</code></td>
+<td>No</td>
+</tr>
+<tr>
+<td>Use a small or medium public dataset</td>
+<td>A config such as <code>data=wikitext2</code> or <code>data=tinystories</code></td>
+<td>First run only</td>
+</tr>
+<tr>
+<td>Avoid materializing a very large corpus</td>
+<td>A streaming config such as <code>data=fineweb-edu</code></td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>Run the SwissAI GIDD experiments</td>
+<td>Download and pre-cache <code>data=nemotron-cc-pretok</code></td>
+<td>No, after preparation</td>
+</tr>
+<tr>
+<td>Reproduce a fixed token budget</td>
+<td>Build a deterministic packed subset</td>
+<td>No, after preparation</td>
+</tr>
+</tbody>
+</table>
+<p>Dataset configurations live in <code>configs/data/</code>. Print the resolved
+configuration before an expensive run:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>python<span class="w"> </span>-m<span class="w"> </span>discrete_diffusion<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nv">data</span><span class="o">=</span>nemotron-cc-pretok<span class="w"> </span><span class="nv">model</span><span class="o">=</span>gidd_hf<span class="w"> </span><span class="nv">algo</span><span class="o">=</span>gidd<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span>--cfg<span class="w"> </span>job<span class="w"> </span>--resolve
+</code></pre></div>
+<h2 id="recommended-clariden-storage-layout">Recommended Clariden storage layout</h2>
+<p>Keep downloads, processed Arrow datasets, and Hugging Face metadata out of
+the home directory:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DATA_ROOT</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data"</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DISCRETE_DIFFUSION_SCRATCH_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="si">}</span><span class="s2">/cache/discrete_diffusion"</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_HOME</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="si">}</span><span class="s2">/cache/hf"</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="si">}</span><span class="s2">/training-data/gidd-nemotron-cc-pretok"</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">DISCRETE_DIFFUSION_SCRATCH_DIR</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">HF_HOME</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="si">}</span><span class="s2">/outputs"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">  </span>logs
+</code></pre></div>
+<p><code>DISCRETE_DIFFUSION_SCRATCH_DIR</code> controls the processed dataset directories
+created by this project. <code>HF_HOME</code> controls Hugging Face downloads and
+metadata. <code>NEMOTRON_PRETOK_DIR</code> identifies the downloaded Nemotron Parquet
+files. These are separate layers and can require substantial space.</p>
+<p>Scratch storage is subject to CSCS retention policies. Copy irreplaceable
+manifests, final checkpoints, and experiment metadata to durable project
+storage.</p>
+<h2 id="option-1-synthetic-data">Option 1: synthetic data</h2>
+<p>Synthetic data is the fastest installation check because it requires no
+credentials or download:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python<span class="w"> </span>-m<span class="w"> </span>discrete_diffusion<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nv">data</span><span class="o">=</span>synthetic<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nv">model</span><span class="o">=</span>tiny<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="nv">algo</span><span class="o">=</span>mdlm<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span><span class="nv">strategy</span><span class="o">=</span>single-device<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span>trainer.devices<span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span>trainer.max_steps<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">  </span>trainer.num_sanity_val_steps<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">  </span>loader.global_batch_size<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span>loader.eval_global_batch_size<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span>loader.batch_size<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span>loader.eval_batch_size<span class="o">=</span><span class="m">8</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">  </span>loader.num_workers<span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">  </span>eval.generate_samples<span class="o">=</span><span class="nb">false</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">  </span>checkpointing.save_dir<span class="o">=</span>.<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">  </span>hydra.run.dir<span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="k">:-</span><span class="p">.</span><span class="si">}</span><span class="s2">/outputs/synthetic-smoke"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">  </span><span class="s1">'~callbacks'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span><span class="s1">'~wandb'</span>
+</code></pre></div>
+<p>Use <code>data=synthetic-gidd</code> with a compatible GIDD model and algorithm when
+testing the GIDD training path. Synthetic data checks code and hardware; it
+does not measure model quality.</p>
+<h2 id="option-2-automatic-hugging-face-download-and-cache">Option 2: automatic Hugging Face download and cache</h2>
+<p>Most configs call <code>datasets.load_dataset</code> automatically. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>-m<span class="w"> </span>discrete_diffusion<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nv">data</span><span class="o">=</span>wikitext2<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="nv">model</span><span class="o">=</span>tiny<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">  </span><span class="nv">algo</span><span class="o">=</span>mdlm<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>trainer.max_steps<span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>hydra.run.dir<span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">DATA_ROOT</span><span class="si">}</span><span class="s2">/outputs/wikitext2-smoke"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">  </span><span class="s1">'~wandb'</span>
+</code></pre></div>
+<p>On the first run, Hugging Face downloads the raw dataset and the project
+tokenizes/packs it. The processed result is saved below the selected data
+config's <code>cache_dir</code>. Later runs reuse it when all cache-defining settings
+match.</p>
+<p>The processed cache name includes important settings such as:</p>
+<ul>
+<li>dataset and split;</li>
+<li>model sequence length (<code>model.length</code>);</li>
+<li>wrapped versus unwrapped packing;</li>
+<li>EOS and special-token insertion; and</li>
+<li>minimum-length or chunking options.</li>
+</ul>
+<p>Changing one of those settings can create another large cache. Inspect the
+resolved config and available space before launching.</p>
+<h3 id="authentication-for-gated-datasets">Authentication for gated datasets</h3>
+<p>Authenticate without putting a token in Git:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span><span class="s1">'&lt;read-token&gt;'</span>
+</code></pre></div>
+<p>Alternatively, use the Hugging Face CLI inside the container:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>huggingface-cli<span class="w"> </span>login
+</code></pre></div>
+<p>Do not write a real token into a tracked YAML, shell script, notebook, or EDF
+file. For a batch job, export <code>HF_TOKEN</code> before <code>sbatch</code>, or place it in a
+private token file readable only by you.</p>
+<h2 id="option-3-streaming">Option 3: streaming</h2>
+<p>Streaming avoids downloading and materializing an entire raw corpus. Existing
+streaming choices include:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>data=openwebtext-streaming
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>data=lm1b-streaming
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>data=fineweb-edu
+</code></pre></div>
+<p>Select one exactly like any other Hydra data config:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python<span class="w"> </span>-m<span class="w"> </span>discrete_diffusion<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nv">data</span><span class="o">=</span>fineweb-edu<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nv">model</span><span class="o">=</span>small<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">  </span><span class="nv">algo</span><span class="o">=</span>mdlm<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span>trainer.max_steps<span class="o">=</span><span class="m">1000</span>
+</code></pre></div>
+<p>Streaming is useful when disk is limited, but it has tradeoffs:</p>
+<ul>
+<li>compute nodes need reliable network access;</li>
+<li>repeated runs may fetch data again;</li>
+<li>exact map-style sampling and some resume/tracing features are unavailable;</li>
+<li>reproducibility depends on the remote dataset revision and stream order.</li>
+</ul>
+<p>For a long production run, prefer a pinned dataset revision and a local,
+materialized cache when practical.</p>
+<h2 id="option-4-pretokenized-nemotron-on-clariden">Option 4: pretokenized Nemotron on Clariden</h2>
+<p>The SwissAI GIDD workflow uses
+<code>dvruette/gidd-nemotron-cc-pretok</code>. The recommended path is to download its
+Parquet files once, then build the packed Arrow cache once on a large CPU
+node.</p>
+<h3 id="1-enter-the-project-container">1. Enter the project container</h3>
+<p>Follow the <a href="../clariden-container/">Clariden container guide</a>, activate
+<code>venv-docker</code>, and verify that <code>HF_TOKEN</code> is available.</p>
+<h3 id="2-download-the-parquet-files">2. Download the Parquet files</h3>
+<p>From the repository root:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_HOME</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data/cache/hf"</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok"</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_TOKEN</span><span class="o">=</span><span class="s1">'&lt;read-token&gt;'</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>sbatch<span class="w"> </span>scripts/data/download_dataset.sh
+</code></pre></div>
+<p>The job downloads to:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>${SCRATCH}/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok
+</code></pre></div>
+<p>It verifies that all 4,608 expected Parquet files exist. Check progress with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>squeue<span class="w"> </span>-u<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">USER</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>tail<span class="w"> </span>-f<span class="w"> </span>gidd_download_&lt;job-id&gt;.log
+</code></pre></div>
+<p>After completion:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok"</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>find<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s1">'*.parquet'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>du<span class="w"> </span>-sh<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="si">}</span><span class="s2">"</span>
+</code></pre></div>
+<h3 id="3-build-the-reusable-packed-cache">3. Build the reusable packed cache</h3>
+<p>Packing is CPU- and memory-intensive. Submit the provided CPU job instead of
+having every GPU run rebuild the data:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>sbatch<span class="w"> </span>scripts/data/precache_nemotron_data.run
+</code></pre></div>
+<p>The launcher requests a large CPU node and writes the packed cache below:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>${SCRATCH}/SwissAI-DLM-data/cache/discrete_diffusion/nemotron-cc-pretok
+</code></pre></div>
+<p>Its defaults target 2,048-token GIDD training. Cache reuse requires matching
+sequence length, wrapping, EOS, and special-token settings. Override worker
+counts when a different CPU or memory allocation is used:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">CACHE_NUM_PROC</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">PACK_NUM_PROC</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">  </span><span class="nv">VALID_CACHE_NUM_PROC</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">VALID_PACK_NUM_PROC</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">  </span>sbatch<span class="w"> </span>scripts/data/precache_nemotron_data.run
+</code></pre></div>
+<h3 id="4-train-from-the-local-data">4. Train from the local data</h3>
+<p>Set both roots in every interactive or batch environment:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">DISCRETE_DIFFUSION_SCRATCH_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data/cache/discrete_diffusion"</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">SCRATCH</span><span class="si">}</span><span class="s2">/SwissAI-DLM-data/training-data/gidd-nemotron-cc-pretok"</span>
+</code></pre></div>
+<p>Then select:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="nv">data</span><span class="o">=</span>nemotron-cc-pretok<span class="w"> </span><span class="nv">model</span><span class="o">=</span>gidd_hf<span class="w"> </span><span class="nv">algo</span><span class="o">=</span>gidd
+</code></pre></div>
+<p>If <code>NEMOTRON_PRETOK_DIR</code> is intentionally unavailable, force the loader to
+read the Hugging Face dataset directly with:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">data</span><span class="o">=</span>nemotron-cc-pretok<span class="w"> </span>data.pretok_local_dir<span class="o">=</span>null
+</code></pre></div>
+<p>That fallback requires network access and authentication and is less suitable
+for repeated multi-node training.</p>
+<h2 id="option-5-deterministic-packed-subset">Option 5: deterministic packed subset</h2>
+<p>After building the full 2,048-token Nemotron cache, create the reproducible
+approximately two-billion-token subset used by the supplied experiments:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>sbatch<span class="w"> </span>scripts/data/build_nemotron_2b_reproducible_subset.sbatch
+</code></pre></div>
+<p>The builder samples packed rows without replacement using NumPy PCG64 and
+seed 4. It saves the selected indices and a JSON manifest containing hashes,
+dataset sizes, versions, and output metadata. It refuses to replace an
+existing output directory.</p>
+<p>Run the small builder validation first when changing this pipeline:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>logs
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>sbatch<span class="w"> </span>scripts/data/smoke_build_reproducible_subset.sbatch
+</code></pre></div>
+<h2 id="offline-reuse">Offline reuse</h2>
+<p>After the raw/tokenizer files and processed cache are present, an offline job
+can prevent accidental network access:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_HUB_OFFLINE</span><span class="o">=</span><span class="m">1</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nb">export</span><span class="w"> </span><span class="nv">HF_DATASETS_OFFLINE</span><span class="o">=</span><span class="m">1</span>
+</code></pre></div>
+<p>Test offline mode with a short job before committing a large allocation. A
+missing tokenizer, dataset revision, or processed cache will fail instead of
+being downloaded.</p>
+<h2 id="inspecting-and-maintaining-caches">Inspecting and maintaining caches</h2>
+<p>Useful read-only checks:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>du<span class="w"> </span>-sh<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">HF_HOME</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DISCRETE_DIFFUSION_SCRATCH_DIR</span><span class="si">}</span><span class="s2">"</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>find<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">DISCRETE_DIFFUSION_SCRATCH_DIR</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>-name<span class="w"> </span>state.json<span class="w"> </span>-print
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>find<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">NEMOTRON_PRETOK_DIR</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-name<span class="w"> </span><span class="s1">'*.parquet'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
+<p>Do not delete a broad cache root while jobs are running. Before removing a
+specific processed dataset, confirm that no active or resumable experiment
+depends on its exact path and configuration.</p>
+<h2 id="adding-another-hugging-face-dataset">Adding another Hugging Face dataset</h2>
+<p>For a standard text dataset supported by <code>datasets.load_dataset</code>, copy the
+closest YAML file under <code>configs/data/</code>, change <code>train</code>, <code>valid</code>, tokenizer,
+cache directory, streaming mode, and packing settings, then select the new
+filename as <code>data=&lt;name&gt;</code>.</p>
+<p>The generic loader expects conventional train/validation/test splits and a
+text-compatible schema. Pretokenized data, unusual split names, multiple text
+columns, or custom preprocessing may require a dedicated branch in
+<code>src/discrete_diffusion/data/loaders.py</code>. Test new data with a tiny model and
+two training steps before launching a full run.</p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><strong>Home quota fills:</strong> verify <code>HF_HOME</code> and
+  <code>DISCRETE_DIFFUSION_SCRATCH_DIR</code> before importing or training.</li>
+<li><strong>401/403 from Hugging Face:</strong> accept the dataset terms if required and
+  verify that <code>HF_TOKEN</code> is a readable token with dataset access.</li>
+<li><strong>No Parquet files found:</strong> verify <code>NEMOTRON_PRETOK_DIR</code> inside the
+  container and ensure the scratch path is mounted by EDF.</li>
+<li><strong>Cache is rebuilt unexpectedly:</strong> compare the resolved data config,
+  especially model length, wrapping, EOS/special-token flags, and chunking.</li>
+<li><strong>Packing runs out of memory:</strong> reduce <code>CACHE_NUM_PROC</code>, <code>PACK_NUM_PROC</code>, or
+  <code>PACK_WRITER_BATCH_SIZE</code> and resubmit the CPU job.</li>
+<li><strong>Offline mode fails:</strong> temporarily unset the offline variables, fetch the
+  missing dataset/tokenizer artifact, then retry offline.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.indexes", "content.code.copy", "content.tooltips"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+        <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+      
+    
+  </body>
+</html>
